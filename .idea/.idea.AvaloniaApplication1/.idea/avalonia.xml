@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/App.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/CourierView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/ActiveView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/CouriersListView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/CustomerMapView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/CustomerOrderView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/MapView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/OrderHistoryView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/OrderView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/CustomerView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/DecisionView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/MainView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/MainWindow.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
