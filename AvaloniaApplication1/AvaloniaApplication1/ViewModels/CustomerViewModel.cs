@@ -20,6 +20,10 @@ public class CustomerViewModel : ViewModelBase {
         set => this.RaiseAndSetIfChanged(ref _Content, value);
     }
 
+    public CustomerViewModel() {
+        Content = SubPages[0];
+    }
+    
     public void RenderMapView() => Content = SubPages[0];
     public void RenderCouriersListView() => Content = SubPages[1];
     public void RenderOrderView() => Content = SubPages[2];

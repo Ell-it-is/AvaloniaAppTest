@@ -5,6 +5,7 @@
       <map>
         <entry key="AvaloniaApplication1/AvaloniaApplication1/App.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/CourierView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/ActiveOrdersView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/ActiveView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/CouriersListView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/CustomerMapView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />

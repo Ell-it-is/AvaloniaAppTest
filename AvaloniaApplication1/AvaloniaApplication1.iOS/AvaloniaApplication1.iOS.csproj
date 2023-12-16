@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia.iOS" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Mapsui.Avalonia" Version="4.1.2" />
     </ItemGroup>
 
     <ItemGroup>
