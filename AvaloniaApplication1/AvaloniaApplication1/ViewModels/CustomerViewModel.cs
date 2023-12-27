@@ -8,8 +8,7 @@ public class CustomerViewModel : ViewModelBase {
     private ViewModelBase[] SubPages = {
         new MapViewModel(),
         new CouriersListViewModel(),
-        new OrderViewModel(),
-        new ActiveOrdersViewModel(),
+        new PrefListViewModel(),
         new OrderHistoryViewModel()
     };
     public ViewModelBase[] GetSubPages => SubPages;
@@ -21,12 +20,11 @@ public class CustomerViewModel : ViewModelBase {
     }
 
     public CustomerViewModel() {
-        Content = SubPages[0];
+        Content = SubPages[2];
     }
     
     public void RenderMapView() => Content = SubPages[0];
     public void RenderCouriersListView() => Content = SubPages[1];
-    public void RenderOrderView() => Content = SubPages[2];
-    public void RenderActiveOrdersView() => Content = SubPages[3];
-    public void RenderOrderHistoryView() => Content = SubPages[4];
+    public void RenderPrefListView() => Content = SubPages[2];
+    public void RenderOrderHistoryView() => Content = SubPages[3];
 }

@@ -9,7 +9,8 @@ namespace AvaloniaApplication1.ViewModels;
 
 public class MainViewModel : ViewModelBase {
     public MainViewModel() {
-        _CurrentPage = PagesService.GetPages().First();
+        //_CurrentPage = PagesService.GetPages().First();
+        _CurrentPage = PagesService.GetPages()[1];
     }
     public ViewModelBase _CurrentPage;
     public ViewModelBase CurrentPage {

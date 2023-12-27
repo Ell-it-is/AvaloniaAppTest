@@ -15,9 +15,7 @@
             <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Command="{Binding RenderCouriersListView}">Couriers</Button>
             <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Command="{Binding RenderOrderView}">Order</Button>
-            <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Command="{Binding RenderActiveOrdersView}">Active</Button>
+                    Command="{Binding RenderPrefListView}">PrefList</Button>
             <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Command="{Binding RenderOrderHistoryView}">History</Button>
         </UniformGrid>
