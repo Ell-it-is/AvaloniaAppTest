@@ -2,7 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels.Customer"
+             xmlns:viewModels="clr-namespace:AvaloniaApplication1.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AvaloniaApplication1.Views.Customer.PrefListView"
              x:DataType="vm:PrefListViewModel">
@@ -15,8 +18,9 @@
                 1) Option to swap position with another restaurant if we select another restaurant at this point
                 2) Option to open details of this restaurant if we perfermed a double tap
         -->
-        <ListBox Name="_PrefList" ItemsSource="{Binding Restaurants}"
+        <ListBox Name="_PrefList" ItemsSource="{Binding RestaurantsList}"
                  Tapped="_PrefList_OnTapped"
-                 DoubleTapped="_PrefList_OnDoubleTapped" />
+                 DoubleTapped="_PrefList_OnDoubleTapped">
+        </ListBox>
     </Grid>
 </UserControl>

@@ -12,6 +12,9 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)"/>
+        <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.6" />
+        <PackageReference Include="Avalonia.Xaml.Interactions" Version="11.0.6" />
+        <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.6" />
         <PackageReference Include="Mapsui.Avalonia" Version="4.1.2" />
     </ItemGroup>
 

@@ -1,25 +1,34 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using AvaloniaApplication1.Models;
+using AvaloniaApplication1.Services;
+using ReactiveUI;
 
 namespace AvaloniaApplication1.ViewModels.Customer;
 
 public class PrefListViewModel : ViewModelBase {
-    public ObservableCollection<string> Restaurants { get; private set; }
+    private int _maxNumberOfPreferences = 4; // can differ based on subscription model
+    public ObservableCollection<Restaurant> RestaurantsList { get; private set; }
+
+    private ViewModelBase[] RestaurantsPages;
+    public ViewModelBase[] GetRestaurantsPages => RestaurantsPages;
 
     public PrefListViewModel() {
-        Restaurants = new ObservableCollection<string>() {
-            "Restaurant 1",
-            "Restaurant 2", 
-            "Restaurant 3",
-            "Restaurant 4"
-        };
-    }
+        RestaurantsList = new ObservableCollection<Restaurant>();
+        RestaurantsPages = new ViewModelBase[_maxNumberOfPreferences];
         
+        for (int i = 0; i < _maxNumberOfPreferences; i++) {
+            RestaurantsList.Add(new Restaurant());
+            RestaurantsPages[i] = new RestaurantDetailViewModel();
+        }
+    }
+    
     /*
      * After tapping on restaurant twice (double tap)
      * -> open screen where you can edit the details
      */
-    public void EditRestaurant() {
-        
+    public void EditRestaurant(int idx) {
+        Console.WriteLine(idx);
     }
     
     /*
@@ -27,8 +36,8 @@ public class PrefListViewModel : ViewModelBase {
      * Then tap again on a restaurant 'r2' and swap its positions
      */
     public void SwapRestaurants(int fromIdx, int toIdx) {
-        string temp = Restaurants[fromIdx];
-        Restaurants[fromIdx] = Restaurants[toIdx];
-        Restaurants[toIdx] = temp;
+        var temp = RestaurantsList[fromIdx];
+        RestaurantsList[fromIdx] = RestaurantsList[toIdx];
+        RestaurantsList[toIdx] = temp;
     }
 }

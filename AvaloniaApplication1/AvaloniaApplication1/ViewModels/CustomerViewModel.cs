@@ -20,6 +20,7 @@ public class CustomerViewModel : ViewModelBase {
     }
 
     public CustomerViewModel() {
+        // Inital page
         Content = SubPages[2];
     }
     
