@@ -18,8 +18,11 @@ public class PrefListViewModel : ViewModelBase {
         RestaurantsPages = new ViewModelBase[_maxNumberOfPreferences];
         
         for (int i = 0; i < _maxNumberOfPreferences; i++) {
-            RestaurantsList.Add(new Restaurant());
-            RestaurantsPages[i] = new RestaurantDetailViewModel();
+            var restaurant = new Restaurant() {
+                Name = "Restaurant " + (i + 1).ToString()
+            };
+            RestaurantsList.Add(restaurant);
+            RestaurantsPages[i] = new RestaurantDetailViewModel(restaurant);
         }
     }
     
@@ -28,7 +31,8 @@ public class PrefListViewModel : ViewModelBase {
      * -> open screen where you can edit the details
      */
     public void EditRestaurant(int idx) {
-        Console.WriteLine(idx);
+        Console.WriteLine("From edit restaurant");
+        App._MainViewModel.CurrentPage = RestaurantsPages[idx];
     }
     
     /*
@@ -36,8 +40,12 @@ public class PrefListViewModel : ViewModelBase {
      * Then tap again on a restaurant 'r2' and swap its positions
      */
     public void SwapRestaurants(int fromIdx, int toIdx) {
-        var temp = RestaurantsList[fromIdx];
+        var tempRestaurant = RestaurantsList[fromIdx];
         RestaurantsList[fromIdx] = RestaurantsList[toIdx];
-        RestaurantsList[toIdx] = temp;
+        RestaurantsList[toIdx] = tempRestaurant;
+
+        var tempRestaurantPage = RestaurantsPages[fromIdx];
+        RestaurantsPages[fromIdx] = RestaurantsPages[toIdx];
+        RestaurantsPages[toIdx] = tempRestaurantPage;
     }
 }

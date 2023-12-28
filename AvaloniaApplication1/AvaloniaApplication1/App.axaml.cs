@@ -2,6 +2,7 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using AvaloniaApplication1.Services;
@@ -16,7 +17,7 @@ public partial class App : Application {
         AvaloniaXamlLoader.Load(this);
     }
     
-    public MainViewModel _MainViewModel { get; set; } = new MainViewModel();
+    public static MainViewModel _MainViewModel { get; set; } = new MainViewModel();
 
     public override void OnFrameworkInitializationCompleted() {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
@@ -29,16 +30,9 @@ public partial class App : Application {
                 DataContext = _MainViewModel
             };
             singleViewPlatform.MainView.Loaded += (_, _) =>
-                TopLevel.GetTopLevel(singleViewPlatform.MainView)!.BackRequested += OnBackRequested;
+                TopLevel.GetTopLevel(singleViewPlatform.MainView)!.BackRequested += _MainViewModel.OnBackRequested;
         }
 
         base.OnFrameworkInitializationCompleted();
-    }
-    
-    private void OnBackRequested(object? sender, RoutedEventArgs e) {
-        if (_MainViewModel.CurrentPage != PagesService.GetPages().First()) {
-            _MainViewModel.BackRequested();
-            e.Handled = true;
-        }
     }
 }

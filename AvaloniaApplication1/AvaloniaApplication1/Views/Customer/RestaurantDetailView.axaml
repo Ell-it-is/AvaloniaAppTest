@@ -7,5 +7,8 @@
              x:Class="AvaloniaApplication1.Views.Customer.RestaurantDetailView"
              x:DataType="vm:RestaurantDetailViewModel">
     
-    <TextBlock>My restaurant detail.</TextBlock>
+    <Grid RowDefinitions="* *">
+        <TextBox Grid.Row="0" Text="{Binding Restaurant.Name}"></TextBox>
+        <TextBlock Grid.Row="1" Text="{Binding Restaurant.IsOpen}"></TextBlock>
+    </Grid>
 </UserControl>
