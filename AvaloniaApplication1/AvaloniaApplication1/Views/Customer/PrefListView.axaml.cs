@@ -6,6 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using AvaloniaApplication1.ViewModels;
 using AvaloniaApplication1.ViewModels.Customer;
@@ -16,22 +17,25 @@ namespace AvaloniaApplication1.Views.Customer;
 public partial class PrefListView : UserControl {
     private PrefListViewModel _prefListViewModel;
     private int lastSelected = -1;
+    private bool swapped = true;
 
     public PrefListView() {
         InitializeComponent();
     }
-    
+
     private void _PrefList_OnTapped(object? sender, TappedEventArgs e) {
         Console.WriteLine("Tapped.");
-        int curSelected = _PrefList.SelectedIndex;
-        if (curSelected == lastSelected) {
-            _PrefList.UnselectAll();
-        } else if (lastSelected != -1) {
-            // Swap the two items
-            _prefListViewModel = (PrefListViewModel) DataContext;
-            _prefListViewModel.SwapRestaurants(curSelected, lastSelected);
+        if (swapped) {
+            lastSelected = _PrefList.SelectedIndex;
+            swapped = false;
+            return;
         }
-        lastSelected = _PrefList.SelectedIndex;
+        // Swap the two items
+        _prefListViewModel = (PrefListViewModel) DataContext;
+        _prefListViewModel.SwapRestaurants(_PrefList.SelectedIndex, lastSelected);
+        // Base case
+        lastSelected = -1;
+        swapped = true;
     }
 
     private void _PrefList_OnDoubleTapped(object? sender, TappedEventArgs e) {

@@ -7,20 +7,33 @@
              xmlns:vm="clr-namespace:AvaloniaApplication1.ViewModels.Customer"
              xmlns:viewModels="clr-namespace:AvaloniaApplication1.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:CompileBindings="True"
              x:Class="AvaloniaApplication1.Views.Customer.PrefListView"
              x:DataType="vm:PrefListViewModel">
-    
+        
     <Grid RowDefinitions="*">
         <!--
         Restaurant states:
             - Not selected
-            - Selected 
+            - Selected
                 1) Option to swap position with another restaurant if we select another restaurant at this point
                 2) Option to open details of this restaurant if we perfermed a double tap
         -->
-        <ListBox Name="_PrefList" ItemsSource="{Binding RestaurantsList}"
+        <ListBox x:Name="_PrefList"
                  Tapped="_PrefList_OnTapped"
-                 DoubleTapped="_PrefList_OnDoubleTapped">
+                 DoubleTapped="_PrefList_OnDoubleTapped"
+                 ItemsSource="{Binding Restaurants}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="8* 4*">
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" />
+                        <Button Grid.Column="1"
+                                Command="{Binding $parent[UserControl].((vm:PrefListViewModel)DataContext).RemoveRestaurant}"
+                                CommandParameter="{Binding $parent[ListBoxItem]}"> Delete
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
 </UserControl>

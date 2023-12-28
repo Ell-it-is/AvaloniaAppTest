@@ -14,7 +14,6 @@ public partial class MainView : UserControl {
     private void InputElement_OnKeyDown(object? sender, KeyEventArgs e) {
         // pressing shift + custom mouse button (binded to PageDown)
         if (e.Key == Key.PageDown && (e.KeyModifiers & KeyModifiers.Shift) != 0) {
-            Console.WriteLine("Backspace pressed.");
             App._MainViewModel.OnBackRequested(sender, e);
         }
     }

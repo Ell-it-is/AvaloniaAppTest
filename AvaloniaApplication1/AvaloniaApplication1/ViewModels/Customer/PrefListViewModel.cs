@@ -1,29 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Avalonia.Controls;
 using AvaloniaApplication1.Models;
 using AvaloniaApplication1.Services;
 using ReactiveUI;
+using Topten.RichTextKit;
 
 namespace AvaloniaApplication1.ViewModels.Customer;
 
 public class PrefListViewModel : ViewModelBase {
     private int _maxNumberOfPreferences = 4; // can differ based on subscription model
-    public ObservableCollection<Restaurant> RestaurantsList { get; private set; }
-
-    private ViewModelBase[] RestaurantsPages;
-    public ViewModelBase[] GetRestaurantsPages => RestaurantsPages;
+    public ObservableCollection<Restaurant> Restaurants { get; private set; }
 
     public PrefListViewModel() {
-        RestaurantsList = new ObservableCollection<Restaurant>();
-        RestaurantsPages = new ViewModelBase[_maxNumberOfPreferences];
-        
+        Restaurants = new ObservableCollection<Restaurant>();
+        AddTestRestaurants();
+    }
+
+    private void AddTestRestaurants() {
         for (int i = 0; i < _maxNumberOfPreferences; i++) {
-            var restaurant = new Restaurant() {
-                Name = "Restaurant " + (i + 1).ToString()
-            };
-            RestaurantsList.Add(restaurant);
-            RestaurantsPages[i] = new RestaurantDetailViewModel(restaurant);
+            var restaurant = new Restaurant() { Name = "Restaurant " + (i + 1).ToString() };
+            Restaurants.Add(restaurant);
         }
+    }
+
+    public void AddRestaurant() {
+        var restaurant = new Restaurant() { Name = "Add new preference" };
+        Restaurants.Add(restaurant);
+    }
+
+    public void RemoveRestaurant(ListBoxItem listBoxItem) {
+        if (Restaurants.Any()) Restaurants.Remove((Restaurant)listBoxItem.Content);
     }
     
     /*
@@ -31,8 +40,20 @@ public class PrefListViewModel : ViewModelBase {
      * -> open screen where you can edit the details
      */
     public void EditRestaurant(int idx) {
-        Console.WriteLine("From edit restaurant");
-        App._MainViewModel.CurrentPage = RestaurantsPages[idx];
+        App._MainViewModel.CurrentPage = new RestaurantDetailViewModel(Restaurants[idx]);
+        Restaurants[idx].Edited = true; // Considering restaurant as edited if user double taps (behaviour for now)
+        AllEditedAddNew();
+    }
+
+    private void AllEditedAddNew() {
+        bool all_edited = true;
+        for (int i = 0; i < Restaurants.Count; i++) {
+            if (!Restaurants[i].Edited) {
+                all_edited = false;
+                break;
+            }
+        }
+        if (all_edited && Restaurants.Count < _maxNumberOfPreferences) AddRestaurant();
     }
     
     /*
@@ -40,12 +61,12 @@ public class PrefListViewModel : ViewModelBase {
      * Then tap again on a restaurant 'r2' and swap its positions
      */
     public void SwapRestaurants(int fromIdx, int toIdx) {
-        var tempRestaurant = RestaurantsList[fromIdx];
-        RestaurantsList[fromIdx] = RestaurantsList[toIdx];
-        RestaurantsList[toIdx] = tempRestaurant;
-
-        var tempRestaurantPage = RestaurantsPages[fromIdx];
-        RestaurantsPages[fromIdx] = RestaurantsPages[toIdx];
-        RestaurantsPages[toIdx] = tempRestaurantPage;
+        if (fromIdx > toIdx) SwapHelper.Swap(ref fromIdx, ref toIdx);
+        // Don't allow to swap not edited last restaurant
+        if (toIdx == Restaurants.Count - 1 && Restaurants[toIdx].Edited is false) return;
+        
+        var tempRestaurant = Restaurants[fromIdx];
+        Restaurants[fromIdx] = Restaurants[toIdx];
+        Restaurants[toIdx] = tempRestaurant;
     }
 }
