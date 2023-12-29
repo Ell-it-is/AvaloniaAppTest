@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
@@ -63,7 +64,8 @@ public partial class PrefListView : UserControl {
                 return;
             }
         } else {
-            int value = int.Parse(content.Substring(0, 1));
+            var reg = new Regex(@"\d+");
+            int value = int.Parse(reg.Match(content).Value);
             if (e.Direction == SpinDirection.Increase) {
                 value++;
             } else {
@@ -77,7 +79,12 @@ public partial class PrefListView : UserControl {
                     value--;
                 }         
             }
-            timeLimitBtn.Content = $"{value} minuty";
+            
+            if (value >= 2 && value <= 4) {
+                timeLimitBtn.Content = $"{value} minuty";
+            } else {
+                timeLimitBtn.Content = $"{value} minut";
+            }
         }
     }
 
