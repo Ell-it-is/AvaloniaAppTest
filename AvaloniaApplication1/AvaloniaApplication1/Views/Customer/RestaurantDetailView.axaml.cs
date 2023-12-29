@@ -19,9 +19,13 @@ public partial class RestaurantDetailView : UserControl {
 
     private void SavePreference_OnClick(object? sender, RoutedEventArgs e) {
         _restaurantDetailViewModel = (RestaurantDetailViewModel) DataContext;
-        _restaurantDetailViewModel.Restaurant.Name = RestaurantNamesComboBox.SelectedItem.ToString();
-        _restaurantDetailViewModel.Restaurant.SelectedFood = FoodNamesComboBox.SelectedItem.ToString();
-        _restaurantDetailViewModel.Restaurant.SelectedDrink = DrinkNamesComboBox.SelectedItem.ToString();
+        
+        var restaurant = _restaurantDetailViewModel.Restaurant.Clone() as Restaurant;
+        _restaurantDetailViewModel.Restaurant.Name = RestaurantNamesComboBox.SelectedItem?.ToString() ?? restaurant.Name;
+        _restaurantDetailViewModel.Restaurant.SelectedFood = FoodNamesComboBox.SelectedItem?.ToString() ?? restaurant.SelectedFood;
+        _restaurantDetailViewModel.Restaurant.SelectedDrink = DrinkNamesComboBox.SelectedItem?.ToString() ?? restaurant.SelectedDrink;
+        _restaurantDetailViewModel.Restaurant.CheckAndSetRestaurantEdited(restaurant);
+        App._MainViewModel.OnBackRequested(sender, e);
     }
 
     private void Panel_OnInitialized(object? sender, EventArgs e) {
