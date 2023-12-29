@@ -7,8 +7,10 @@
              x:Class="AvaloniaApplication1.Views.Customer.RestaurantDetailView"
              x:DataType="vm:RestaurantDetailViewModel">
     
-    <Grid RowDefinitions="* *">
-        <TextBox Grid.Row="0" Text="{Binding Restaurant.Name}"></TextBox>
-        <TextBlock Grid.Row="1" Text="{Binding Restaurant.IsOpen}"></TextBlock>
-    </Grid>
+    <StackPanel Initialized="Panel_OnInitialized">
+        <ComboBox Name="RestaurantNamesComboBox"></ComboBox>
+        <ComboBox Name="FoodNamesComboBox"></ComboBox>
+        <ComboBox Name="DrinkNamesComboBox"></ComboBox>
+        <Button Click="SavePreference_OnClick">Ulozit preferenci</Button>
+    </StackPanel>
 </UserControl>

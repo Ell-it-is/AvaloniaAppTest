@@ -19,15 +19,16 @@ public class PrefListViewModel : ViewModelBase {
         AddRestaurant();
     }
 
+    // used for testing purpose only
     private void AddTestRestaurants() {
         for (int i = 0; i < _maxNumberOfPreferences; i++) {
-            var restaurant = new Restaurant() { Name = "Restaurant " + (i + 1).ToString() };
+            var restaurant = new Restaurant();
             Restaurants.Add(restaurant);
         }
     }
 
     public void AddRestaurant() {
-        var restaurant = new Restaurant() { Name = "Add new preference", SelectedFood = "Tasty food", SelectedDrink = "Drinky drink"};
+        var restaurant = new Restaurant();
         Restaurants.Add(restaurant);
     }
 
