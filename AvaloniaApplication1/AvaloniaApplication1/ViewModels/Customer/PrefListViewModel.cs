@@ -16,7 +16,7 @@ public class PrefListViewModel : ViewModelBase {
 
     public PrefListViewModel() {
         Restaurants = new ObservableCollection<Restaurant>();
-        AddTestRestaurants();
+        AddRestaurant();
     }
 
     private void AddTestRestaurants() {
@@ -27,12 +27,13 @@ public class PrefListViewModel : ViewModelBase {
     }
 
     public void AddRestaurant() {
-        var restaurant = new Restaurant() { Name = "Add new preference" };
+        var restaurant = new Restaurant() { Name = "Add new preference", SelectedFood = "Tasty food", SelectedDrink = "Drinky drink"};
         Restaurants.Add(restaurant);
     }
 
     public void RemoveRestaurant(ListBoxItem listBoxItem) {
         if (Restaurants.Any()) Restaurants.Remove((Restaurant)listBoxItem.Content);
+        if (Restaurants.Count == 0) AddRestaurant();
     }
     
     /*
@@ -40,6 +41,7 @@ public class PrefListViewModel : ViewModelBase {
      * -> open screen where you can edit the details
      */
     public void EditRestaurant(int idx) {
+        if (idx == -1) return;
         App._MainViewModel.CurrentPage = new RestaurantDetailViewModel(Restaurants[idx]);
         Restaurants[idx].Edited = true; // Considering restaurant as edited if user double taps (behaviour for now)
         AllEditedAddNew();

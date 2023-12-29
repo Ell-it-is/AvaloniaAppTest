@@ -17,7 +17,6 @@ namespace AvaloniaApplication1.Views.Customer;
 public partial class PrefListView : UserControl {
     private PrefListViewModel _prefListViewModel;
     private int lastSelected = -1;
-    private bool swapped = true;
 
     public PrefListView() {
         InitializeComponent();
@@ -25,17 +24,15 @@ public partial class PrefListView : UserControl {
 
     private void _PrefList_OnTapped(object? sender, TappedEventArgs e) {
         Console.WriteLine("Tapped.");
-        if (swapped) {
+        if (lastSelected == -1) {
             lastSelected = _PrefList.SelectedIndex;
-            swapped = false;
             return;
         }
         // Swap the two items
         _prefListViewModel = (PrefListViewModel) DataContext;
         _prefListViewModel.SwapRestaurants(_PrefList.SelectedIndex, lastSelected);
-        // Base case
+        // Return to base case
         lastSelected = -1;
-        swapped = true;
     }
 
     private void _PrefList_OnDoubleTapped(object? sender, TappedEventArgs e) {

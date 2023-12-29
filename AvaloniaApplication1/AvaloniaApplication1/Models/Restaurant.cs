@@ -4,6 +4,8 @@ namespace AvaloniaApplication1.Models;
 
 public class Restaurant {
     public string Name { get; set; }
+    public string SelectedFood { get; set; }
+    public string SelectedDrink { get; set; }
     public bool IsOpen { get; set; }
     public bool Edited { get; set; }
 
