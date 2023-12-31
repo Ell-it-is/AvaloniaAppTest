@@ -25,7 +25,11 @@ public class Restaurant : ReactiveObject {
     [Reactive]
     public bool IsOpen { get; set; }
     public bool IsValid => 
-        Name != DefaultRestaurant.Name && (SelectedFood != DefaultRestaurant.SelectedFood || SelectedDrink != DefaultRestaurant.SelectedDrink); 
+        Name != DefaultRestaurant.Name && (SelectedFood != DefaultRestaurant.SelectedFood || SelectedDrink != DefaultRestaurant.SelectedDrink);
+
+    public Restaurant() {
+        
+    }
     
     public override string ToString() {
         return "Not initialized Restaurant";

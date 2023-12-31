@@ -20,6 +20,7 @@
                 2) Option to open details of this restaurant if we perfermed a double tap
         -->
         <ListBox Name="_PrefList"
+                 IsEnabled="{Binding PrefListIsEnabled}"
                  Tapped="_PrefList_OnTapped"
                  DoubleTapped="_PrefList_OnDoubleTapped"
                  ItemsSource="{Binding Restaurants}">
@@ -46,9 +47,9 @@
         </ListBox>
         <ToggleButton Name="SearchCouriersToggleBtn"
                       Margin="0 20 0 0"
-                      Command="{Binding AllowSearchCommand}"
-                      CommandParameter="{Binding #SearchCouriersToggleBtn}">
-            Click here, to begin your order
+                      Command="{Binding CheckToggleBtn}"
+                      Content="{Binding ToggleBtnContent}"
+                      IsEnabled="{Binding ToggleBtnIsEnabled}">
         </ToggleButton>
     </StackPanel>
 </UserControl>

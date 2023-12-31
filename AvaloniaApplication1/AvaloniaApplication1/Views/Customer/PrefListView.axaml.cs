@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+using System.Collections.ObjectModel;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Data.Converters;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using AvaloniaApplication1.Helpers;
 using AvaloniaApplication1.Models;
-using AvaloniaApplication1.ViewModels;
 using AvaloniaApplication1.ViewModels.Customer;
 using DynamicData;
+using DynamicData.Binding;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace AvaloniaApplication1.Views.Customer;
 

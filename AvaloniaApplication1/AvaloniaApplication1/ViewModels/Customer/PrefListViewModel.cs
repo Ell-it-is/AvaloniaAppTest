@@ -24,13 +24,21 @@ namespace AvaloniaApplication1.ViewModels.Customer;
 
 public class PrefListViewModel : ViewModelBase {
     private int _maxNumberOfPreferences = 4; // can differ based on subscription model
+    private readonly string searchToggleDefault = "Prvne zvolte restauraci a objednavku";
+    private readonly string searchToggleOff = "Kliknete zde pro zahajeni hledani";
+    private readonly string searchToggleOn = "Prave hledam dostupne kuryry!";
     
-    private SourceList<Restaurant> Source { get; set; } = new SourceList<Restaurant>();
-    private readonly ReadOnlyObservableCollection<Restaurant> _restaurants;
+    public SourceList<Restaurant> Source { get; set; } = new SourceList<Restaurant>();
+    public readonly ReadOnlyObservableCollection<Restaurant> _restaurants;
     public ReadOnlyObservableCollection<Restaurant> Restaurants => _restaurants;
     
-    public ReactiveCommand<ToggleButton, Unit> AllowSearchCommand { get; set; }
-
+    [Reactive]
+    public string ToggleBtnContent { get; set; }
+    [Reactive]
+    public bool ToggleBtnIsEnabled { get; set; }
+    [Reactive] 
+    public bool PrefListIsEnabled { get; set; } = true;
+    
     public PrefListViewModel() {
         AddRestaurant();
         
@@ -41,48 +49,48 @@ public class PrefListViewModel : ViewModelBase {
             .Bind(out _restaurants)
             .Subscribe();
         
-        ReactiveCommand<Unit, Unit> AutoAddCommand = ReactiveCommand.Create(AutoAddRestaurant);
+        ReactiveCommand<Unit, Unit> sourceChangedCommand = ReactiveCommand.Create(ReactToSourceChanged);
         var canAdd = Source
             .Connect()
             //.Trace("AddRestaurantObservable")
             .WhenAnyPropertyChanged()
             .Select(_ => System.Reactive.Unit.Default)
-            .InvokeCommand(AutoAddCommand);
+            .InvokeCommand(sourceChangedCommand);
         
         var canAddOnDelete = Source
             .Connect()
             //.Trace("AddOnDeleteRestaurantObservable")
             .CountChanged()
             .Select(_ => System.Reactive.Unit.Default)
-            .InvokeCommand(AutoAddCommand);
-        
-        var allowSearchObservable = Source
-            .Connect()
-            .Trace("AllowSearchRestaurantObservable")
-            .AutoRefreshOnObservable(
-                r => r.WhenAnyValue(x => x.Name))
-            .ToCollection()
-            .Select(c => c.Any(r => r.IsValid));
-        
-        AllowSearchCommand = ReactiveCommand.Create<ToggleButton>(ChangeToggleBtn, allowSearchObservable);
+            .InvokeCommand(sourceChangedCommand);
     }
-
-    public void ChangeToggleBtn(ToggleButton toggleBtn) {
-        string searchToggleOn = "Prave hledam dostupne kuryry!";
-        string searchToggleOff = "Kliknete zde pro zahajeni hledani";
-        
-        string content = (string)toggleBtn.Content;
-        toggleBtn.Content = content == searchToggleOn ? searchToggleOff : searchToggleOn;
+    
+    public void CheckToggleBtn() {
+        ToggleBtnContent = ToggleBtnContent == searchToggleOff ? searchToggleOn : searchToggleOff;
+        PrefListIsEnabled = ToggleBtnContent == searchToggleOff;
     }
-
+    
+    public void ReactToSourceChanged() {
+        AutoAddRestaurant();
+        if (!AnyRestaurantValid() && Source.Count == 1) {
+            ToggleBtnContent = searchToggleDefault;
+            ToggleBtnIsEnabled = false;
+            PrefListIsEnabled = true;
+        } else if (AnyRestaurantValid()) {
+            ToggleBtnContent = searchToggleOff;
+            ToggleBtnIsEnabled = true;
+            PrefListIsEnabled = true;
+        }
+    }
+    
     public void AutoAddRestaurant() {
         if (AllRestaurantsValid() && Source.Count < _maxNumberOfPreferences) 
             AddRestaurant();
     }
 
-    private bool AnyRestaurantValid() => Source.Items.Any(r => r.IsValid);
-    private bool AllRestaurantsValid() => Source.Items.All(r => r.IsValid);
-    private void AddRestaurant() => Source.Add(new Restaurant());
+    public bool AnyRestaurantValid() => Source.Items.Any(r => r.IsValid);
+    public bool AllRestaurantsValid() => Source.Items.All(r => r.IsValid);
+    public void AddRestaurant() => Source.Add(new Restaurant());
 
     public void RemoveRestaurant(ListBoxItem listBoxItem) {
         if (listBoxItem is null) return;
@@ -118,4 +126,16 @@ public class PrefListViewModel : ViewModelBase {
             Source.Add(restaurant);
         }
     }
+    
+    /*
+     Idk could be useful in the future:
+     
+     var allowSearchObservable = Source
+    .Connect()
+    //.Trace("AllowSearchRestaurantObservable")
+    .AutoRefreshOnObservable(
+        r => r.WhenAnyValue(x => x.Name))
+    .ToCollection()
+    .Select(c => c.Any(r => r.IsValid));*/
+    // AllowSearchCommand = ReactiveCommand.Create<ToggleButton>(ChangeToggleBtn, allowSearchObservable);
 }
