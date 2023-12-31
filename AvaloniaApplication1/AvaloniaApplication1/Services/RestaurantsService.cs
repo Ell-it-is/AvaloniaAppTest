@@ -12,6 +12,7 @@ public static class RestaurantsService {
     };
     
     public static readonly List<string> FoodNames = new List<string>() {
+        "Zadne",
         "Bramborak",
         "Pizza",
         "Svickova",
@@ -20,6 +21,7 @@ public static class RestaurantsService {
     };
     
     public static readonly List<string> DrinkNames = new List<string>() {
+        "Zadne",
         "Cola",
         "Kofola",
         "Malinovka",

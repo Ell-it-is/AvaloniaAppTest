@@ -72,11 +72,11 @@ public class PrefListViewModel : ViewModelBase {
     
     public void ReactToSourceChanged() {
         AutoAddRestaurant();
-        if (!AnyRestaurantValid() && Source.Count == 1) {
+        if (!AnyRestaurantValid()) {
             ToggleBtnContent = searchToggleDefault;
             ToggleBtnIsEnabled = false;
             PrefListIsEnabled = true;
-        } else if (AnyRestaurantValid()) {
+        } else {
             ToggleBtnContent = searchToggleOff;
             ToggleBtnIsEnabled = true;
             PrefListIsEnabled = true;

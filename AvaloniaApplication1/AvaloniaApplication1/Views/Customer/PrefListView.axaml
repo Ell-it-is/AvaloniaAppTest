@@ -28,10 +28,13 @@
                 <DataTemplate>
                     <Grid ColumnDefinitions="* * 0.3*"
                           RowDefinitions="* * *">
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Name}" />
-                        <!-- Zobrazit pouze jidle nebo piti nebo oboje (dle toho co je vyplneno) -->
-                        <TextBlock Grid.Row="1" Grid.Column="0" Padding="10 0 0 10" Text="{Binding SelectedFood}"></TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Padding="10 0 0 0" Text="{Binding SelectedDrink}"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="0" 
+                                   Text="{Binding Name}" IsVisible="{Binding NameVisible}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Padding="10 0 0 10" 
+                                   Text="{Binding SelectedFood}" IsVisible="{Binding FoodVisible}"></TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Padding="10 0 0 0" 
+                                   Text="{Binding SelectedDrink}" IsVisible="{Binding DrinkVisible}"></TextBlock>
+                        <TextBlock VerticalAlignment="Center" IsVisible="{Binding DefaultTextVisible}" Text="Zvolte objednavku"></TextBlock>
                         <ButtonSpinner Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
                                        Initialized="TimeLimit_OnInitialized"
                                        Spin="TimeLimit_OnSpin">
