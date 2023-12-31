@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using AvaloniaApplication1.Models;
+using DynamicData;
 
 namespace AvaloniaApplication1.ViewModels.Customer;
 

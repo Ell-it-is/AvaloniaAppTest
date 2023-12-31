@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using AvaloniaApplication1.Models;
 using AvaloniaApplication1.ViewModels;
 using AvaloniaApplication1.ViewModels.Customer;
 using DynamicData;
@@ -24,15 +26,8 @@ public partial class PrefListView : UserControl {
         InitializeComponent();
     }
     
-    private void _PrefList_OnLoaded(object? sender, RoutedEventArgs e) {
-        _prefListViewModel = (PrefListViewModel) DataContext;
-        
-        _prefListViewModel.AllEditedAddNew();
-    }
-
     private void _PrefList_OnTapped(object? sender, TappedEventArgs e) {
         _prefListViewModel = (PrefListViewModel) DataContext;
-        
         if (lastSelected == -1) {
             lastSelected = _PrefList.SelectedIndex;
             return;
@@ -44,14 +39,9 @@ public partial class PrefListView : UserControl {
 
     private void _PrefList_OnDoubleTapped(object? sender, TappedEventArgs e) {
         _prefListViewModel = (PrefListViewModel) DataContext;
-        
-        _prefListViewModel.EditRestaurant(_PrefList.SelectedIndex);
-    }
-
-    private void SearchCouriersToggleBtn_OnInitialized(object? sender, EventArgs e) {
-        SearchCouriersToggleBtn.IsChecked = false;
-        string searchToggleOff = "Click here, to begin your order";
-        SearchCouriersToggleBtn.Content = searchToggleOff;
+        if (_PrefList.SelectedIndex != -1) {
+            _prefListViewModel.EditRestaurant(_PrefList.SelectedIndex);
+        }   
     }
 
     private void TimeLimit_OnSpin(object? sender, SpinEventArgs e) {
@@ -91,4 +81,12 @@ public partial class PrefListView : UserControl {
         var timeLimitBtn = sender as ButtonSpinner;
         timeLimitBtn.Content = infinity;
     }
+
+    /*private void SearchCouriersToggleBtn_OnClick(object? sender, RoutedEventArgs e) {
+        var toggleButton = sender as ToggleButton;
+        string searchToggleOn = "Searching for couriers!";
+        string searchToggleOff = "Click here, to begin your order";
+        bool isChecked = toggleButton.IsChecked ?? false;
+        toggleButton.Content = isChecked ? searchToggleOn : searchToggleOff;
+    }*/
 }
