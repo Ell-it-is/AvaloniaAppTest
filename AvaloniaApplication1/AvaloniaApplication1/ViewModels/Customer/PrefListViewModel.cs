@@ -29,7 +29,7 @@ public class PrefListViewModel : ViewModelBase {
     private readonly ReadOnlyObservableCollection<Restaurant> _restaurants;
     public ReadOnlyObservableCollection<Restaurant> Restaurants => _restaurants;
     
-    public ReactiveCommand<Unit, Unit> AllowSearchCommand { get; set; }
+    public ReactiveCommand<ToggleButton, Unit> AllowSearchCommand { get; set; }
 
     public PrefListViewModel() {
         AddRestaurant();
@@ -58,13 +58,21 @@ public class PrefListViewModel : ViewModelBase {
         
         var allowSearchObservable = Source
             .Connect()
-            //.Trace("AllowSearchRestaurantObservable")
+            .Trace("AllowSearchRestaurantObservable")
             .AutoRefreshOnObservable(
                 r => r.WhenAnyValue(x => x.Name))
             .ToCollection()
             .Select(c => c.Any(r => r.IsValid));
         
-        AllowSearchCommand = ReactiveCommand.Create(() => { }, allowSearchObservable);
+        AllowSearchCommand = ReactiveCommand.Create<ToggleButton>(ChangeToggleBtn, allowSearchObservable);
+    }
+
+    public void ChangeToggleBtn(ToggleButton toggleBtn) {
+        string searchToggleOn = "Prave hledam dostupne kuryry!";
+        string searchToggleOff = "Kliknete zde pro zahajeni hledani";
+        
+        string content = (string)toggleBtn.Content;
+        toggleBtn.Content = content == searchToggleOn ? searchToggleOff : searchToggleOn;
     }
 
     public void AutoAddRestaurant() {

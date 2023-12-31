@@ -43,7 +43,12 @@ public partial class PrefListView : UserControl {
             _prefListViewModel.EditRestaurant(_PrefList.SelectedIndex);
         }   
     }
-
+    
+    private void TimeLimit_OnInitialized(object? sender, EventArgs e) {
+        var timeLimitBtn = sender as ButtonSpinner;
+        timeLimitBtn.Content = infinity;
+    }
+    
     private void TimeLimit_OnSpin(object? sender, SpinEventArgs e) {
         var timeLimitBtn = sender as ButtonSpinner;
         string content = timeLimitBtn.Content as string;
@@ -76,17 +81,4 @@ public partial class PrefListView : UserControl {
             }
         }
     }
-
-    private void TimeLimit_OnInitialized(object? sender, EventArgs e) {
-        var timeLimitBtn = sender as ButtonSpinner;
-        timeLimitBtn.Content = infinity;
-    }
-
-    /*private void SearchCouriersToggleBtn_OnClick(object? sender, RoutedEventArgs e) {
-        var toggleButton = sender as ToggleButton;
-        string searchToggleOn = "Searching for couriers!";
-        string searchToggleOff = "Click here, to begin your order";
-        bool isChecked = toggleButton.IsChecked ?? false;
-        toggleButton.Content = isChecked ? searchToggleOn : searchToggleOff;
-    }*/
 }

@@ -46,7 +46,8 @@
         </ListBox>
         <ToggleButton Name="SearchCouriersToggleBtn"
                       Margin="0 20 0 0"
-                      Command="{Binding AllowSearchCommand}">
+                      Command="{Binding AllowSearchCommand}"
+                      CommandParameter="{Binding #SearchCouriersToggleBtn}">
             Click here, to begin your order
         </ToggleButton>
     </StackPanel>
