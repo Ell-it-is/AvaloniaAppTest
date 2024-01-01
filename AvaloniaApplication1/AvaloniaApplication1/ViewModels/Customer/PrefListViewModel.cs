@@ -9,6 +9,8 @@ using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Media;
+using Avalonia.Media.Immutable;
 using Avalonia.Xaml.Interactions.Core;
 using AvaloniaApplication1.Helpers;
 using AvaloniaApplication1.Models;
@@ -19,12 +21,13 @@ using ExCSS;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Topten.RichTextKit;
+using Color = Avalonia.Media.Color;
 
 namespace AvaloniaApplication1.ViewModels.Customer;
 
 public class PrefListViewModel : ViewModelBase {
     private int _maxNumberOfPreferences = 4; // can differ based on subscription model
-    private readonly string searchToggleDefault = "Prvne si zvolte co chcete objednat";
+    private readonly string searchToggleDefault = "Po zvoleni preference, muzete vyhledat kuryra";
     private readonly string searchToggleOff = "Vyhledat kuryra";
     private readonly string searchToggleOn = "Cekam na potvrzeni od kuryra v okoli...";
     
@@ -32,16 +35,13 @@ public class PrefListViewModel : ViewModelBase {
     public readonly ReadOnlyObservableCollection<Restaurant> _restaurants;
     public ReadOnlyObservableCollection<Restaurant> Restaurants => _restaurants;
     
-    [Reactive]
-    public string ToggleBtnContent { get; set; }
-    [Reactive]
-    public bool ToggleBtnIsEnabled { get; set; }
-    [Reactive] 
-    public bool PrefListIsEnabled { get; set; } = true;
+    [Reactive] public string ToggleBtnContent { get; set; }
+    [Reactive] public bool ToggleBtnIsEnabled { get; set; }
+    [Reactive] public bool PrefListIsEnabled { get; set; } = true;
+    public ItemCollection MyItems { get; set; }
     
     public PrefListViewModel() {
         AddRestaurant();
-        
         var disposable = Source
             .Connect()
             //.Trace("RestaurantsBindObservable")
@@ -71,6 +71,7 @@ public class PrefListViewModel : ViewModelBase {
     }
     
     public void ReactToSourceChanged() {
+        CalculatePositions();
         AutoAddRestaurant();
         if (!AnyRestaurantValid()) {
             ToggleBtnContent = searchToggleDefault;
@@ -80,6 +81,12 @@ public class PrefListViewModel : ViewModelBase {
             ToggleBtnContent = searchToggleOff;
             ToggleBtnIsEnabled = true;
             PrefListIsEnabled = true;
+        }
+    }
+
+    public void CalculatePositions() {
+        foreach (var r in Source.Items.Where(r => r.IsValid)) {
+            r.Position = $"{Source.Items.IndexOf(r) + 1}.";
         }
     }
     
@@ -110,13 +117,16 @@ public class PrefListViewModel : ViewModelBase {
      * Then tap again on a restaurant 'r2' and swap its positions
      */
     public void SwapRestaurants(int fromIdx, int toIdx) {
-        /*if (fromIdx > toIdx) SwapHelper.Swap(ref fromIdx, ref toIdx);
+        if (fromIdx > toIdx) SwapHelper.Swap(ref fromIdx, ref toIdx);
         // Don't allow to swap not edited last restaurant
-        // TODO if (toIdx == Restaurants.Count - 1 && Restaurants[toIdx].IsValid is false) return;
+        if (Source.Items.ElementAt(fromIdx).IsValid == false || Source.Items.ElementAt(toIdx).IsValid == false) return;
         
-        var tempRestaurant = Restaurants[fromIdx];
-        Restaurants[fromIdx] = Restaurants[toIdx];
-        Restaurants[toIdx] = tempRestaurant;*/
+        var fromRestaurant = Restaurants[fromIdx];
+        var toRestaurant = Restaurants[toIdx];
+        
+        Source.ReplaceAt(fromIdx, toRestaurant);
+        Source.ReplaceAt(toIdx, fromRestaurant);
+        CalculatePositions();
     }
     
     // used for testing purpose only

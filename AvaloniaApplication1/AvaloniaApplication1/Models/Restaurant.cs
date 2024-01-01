@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -23,28 +24,26 @@ public class Restaurant : ReactiveObject {
     [Reactive] public string SelectedDrink { get; set; } = DefaultRestaurant.SelectedDrink;
     [Reactive] public bool IsOpen { get; set; }
     [Reactive] public string SpinnerContent { get; set; } = "Infinity";
+    [Reactive] public string Position { get; set; }
     
     // You must select Restaurant name and either food or drink
     public bool IsValid => Name != DefaultRestaurant.Name && (SelectedFood != DefaultRestaurant.SelectedFood || SelectedDrink != DefaultRestaurant.SelectedDrink);
-
-    private bool _canDelete => this.IsValid;
-    public bool CanDelete => _canDelete;
-
+    
     private bool _nameVisible => this.IsValid && Name != DefaultRestaurant.Name;
     public bool NameVisible => _nameVisible;
     
     private bool _foodVisible => this.IsValid && SelectedFood != DefaultRestaurant.SelectedFood;
     public bool FoodVisible => _foodVisible;
-
+    
     private bool _drinkVisible => this.IsValid && SelectedDrink != DefaultRestaurant.SelectedDrink;
     public bool DrinkVisible => _drinkVisible;
-
+    
     private bool _defaultTextVisible => !this.IsValid;
     public bool DefaultTextVisible => _defaultTextVisible;
-
+    
     public Restaurant() {
         
     }
-
+    
     public override string ToString() => Name == DefaultRestaurant.Name ? Name : "Unknown restaurant";
 }

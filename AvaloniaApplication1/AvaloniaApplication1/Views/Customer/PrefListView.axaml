@@ -14,7 +14,6 @@
     <Design.DataContext>    
         <vm:PrefListViewModel/>
     </Design.DataContext>
-    <!--TODO: Make delete button as square shape of listboxitem height (more easily clickable)-->
     <Grid RowDefinitions="* Auto">
         <!--
         Restaurant states:
@@ -30,29 +29,37 @@
                  ItemsSource="{Binding Restaurants}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="* * *"
+                    <Grid ColumnDefinitions="Auto * * *"
                           RowDefinitions="* * *">
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="{Binding Position}"
+                                   IsVisible="{Binding IsValid}"
+                                   Padding="0 0 10 0"></TextBlock>
                         <TextBlock Grid.Row="0" Grid.Column="0" 
+                                   Padding="10"
+                                   IsVisible="{Binding DefaultTextVisible}"
+                                   Text="Neznama restaurace"></TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1" 
                                    Text="{Binding Name}" IsVisible="{Binding NameVisible}" />
-                        <TextBlock Grid.Row="1" Grid.Column="0" Padding="10 0 0 10" 
+                        <TextBlock Grid.Row="1" Grid.Column="1" Padding="10 0 0 10" 
                                    Text="{Binding SelectedFood}" IsVisible="{Binding FoodVisible}"></TextBlock>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Padding="10 0 0 0" 
+                        <TextBlock Grid.Row="2" Grid.Column="1" Padding="10 0 0 0" 
                                    Text="{Binding SelectedDrink}" IsVisible="{Binding DrinkVisible}"></TextBlock>
-                        <TextBlock VerticalAlignment="Center" IsVisible="{Binding DefaultTextVisible}" Text="Zvolit objednavku"></TextBlock>
-                        <ButtonSpinner Grid.Row="0" Grid.Column="1" 
+                        <ButtonSpinner Grid.Row="0" Grid.Column="2" 
                                        Name="BtnSpinner"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Spin="TimeLimit_OnSpin"
-                                       Content="{Binding SpinnerContent}">
+                                       Content="{Binding SpinnerContent}"
+                                       IsVisible="{Binding IsValid}">
                                        <!--ToolTip.Tip="Jak dlouho jsem ochotny cekat na kuryra"-->
                         </ButtonSpinner>
-                        <Button Grid.Row="0" Grid.Column="2" 
+                        <Button Grid.Row="0" Grid.Column="3" 
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Command="{Binding $parent[UserControl].((vm:PrefListViewModel)DataContext).RemoveRestaurant}"
                                 CommandParameter="{Binding $parent[ListBoxItem]}"
-                                IsVisible="{Binding CanDelete}">
+                                IsVisible="{Binding IsValid}">
                              Delete
                         </Button>
                     </Grid>
