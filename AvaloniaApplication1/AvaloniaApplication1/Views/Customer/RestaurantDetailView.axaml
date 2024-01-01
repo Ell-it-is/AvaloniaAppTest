@@ -7,10 +7,37 @@
              x:Class="AvaloniaApplication1.Views.Customer.RestaurantDetailView"
              x:DataType="vm:RestaurantDetailViewModel">
     
-    <StackPanel Initialized="Panel_OnInitialized">
-        <ComboBox Name="RestaurantNamesComboBox"></ComboBox>
-        <ComboBox Name="FoodNamesComboBox"></ComboBox>
-        <ComboBox Name="DrinkNamesComboBox"></ComboBox>
-        <Button Click="SavePreference_OnClick">Ulozit preferenci</Button>
-    </StackPanel>
+    <Design.DataContext>    
+        <vm:RestaurantDetailViewModel/>
+    </Design.DataContext>
+    
+    <Grid Initialized="StyledElement_OnInitialized"
+          RowDefinitions="auto auto auto auto auto auto * auto">
+        <Label Grid.Row="0">Nazev restaurace:</Label>
+        <ComboBox Grid.Row="1" Name="RestaurantNamesComboBox"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="0 0 0 15"
+                  FontSize="15"></ComboBox>
+        <Label Grid.Row="2">Jidlo:</Label>
+        <ComboBox Grid.Row="3" Name="FoodNamesComboBox"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="0 0 0 15"
+                  FontSize="15"></ComboBox>
+        <Label Grid.Row="4">Piti:</Label>
+        <ComboBox Grid.Row="5" Name="DrinkNamesComboBox"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Margin="0 0 0 15"
+                  FontSize="15"></ComboBox>
+        <Button Grid.Row="7" Click="SavePreference_OnClick"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Padding="20"
+                FontSize="16"
+                FontWeight="400">Ulozit preferenci</Button>
+    </Grid>
 </UserControl>

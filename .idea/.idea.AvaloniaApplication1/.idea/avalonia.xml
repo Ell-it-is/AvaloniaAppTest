@@ -13,8 +13,8 @@
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/MapView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/OrderHistoryView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/OrderView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
-        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/PrefListView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
-        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/RestaurantDetailView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/PrefListView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Desktop/AvaloniaApplication1.Desktop.csproj" />
+        <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/Customer/RestaurantDetailView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Desktop/AvaloniaApplication1.Desktop.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/CustomerView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/DecisionView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />
         <entry key="AvaloniaApplication1/AvaloniaApplication1/Views/MainView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.Browser/AvaloniaApplication1.Browser.csproj" />

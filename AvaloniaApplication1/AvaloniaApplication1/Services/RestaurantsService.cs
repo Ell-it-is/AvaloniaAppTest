@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AvaloniaApplication1.Models;
 
 namespace AvaloniaApplication1.Services;
 
@@ -12,7 +13,7 @@ public static class RestaurantsService {
     };
     
     public static readonly List<string> FoodNames = new List<string>() {
-        "Zadne",
+        DefaultRestaurant.SelectedFood,
         "Bramborak",
         "Pizza",
         "Svickova",
@@ -21,7 +22,7 @@ public static class RestaurantsService {
     };
     
     public static readonly List<string> DrinkNames = new List<string>() {
-        "Zadne",
+        DefaultRestaurant.SelectedDrink,
         "Cola",
         "Kofola",
         "Malinovka",

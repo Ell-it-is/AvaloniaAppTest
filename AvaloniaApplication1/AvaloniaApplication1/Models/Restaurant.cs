@@ -22,7 +22,13 @@ public class Restaurant : ReactiveObject {
     [Reactive] public string SelectedFood { get; set; } = DefaultRestaurant.SelectedFood;
     [Reactive] public string SelectedDrink { get; set; } = DefaultRestaurant.SelectedDrink;
     [Reactive] public bool IsOpen { get; set; }
+    [Reactive] public string SpinnerContent { get; set; } = "Infinity";
+    
+    // You must select Restaurant name and either food or drink
     public bool IsValid => Name != DefaultRestaurant.Name && (SelectedFood != DefaultRestaurant.SelectedFood || SelectedDrink != DefaultRestaurant.SelectedDrink);
+
+    private bool _canDelete => this.IsValid;
+    public bool CanDelete => _canDelete;
 
     private bool _nameVisible => this.IsValid && Name != DefaultRestaurant.Name;
     public bool NameVisible => _nameVisible;
@@ -39,8 +45,6 @@ public class Restaurant : ReactiveObject {
     public Restaurant() {
         
     }
-    
-    public override string ToString() {
-        return "Not initialized Restaurant";
-    }
+
+    public override string ToString() => Name == DefaultRestaurant.Name ? Name : "Unknown restaurant";
 }

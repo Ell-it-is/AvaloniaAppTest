@@ -24,9 +24,9 @@ namespace AvaloniaApplication1.ViewModels.Customer;
 
 public class PrefListViewModel : ViewModelBase {
     private int _maxNumberOfPreferences = 4; // can differ based on subscription model
-    private readonly string searchToggleDefault = "Prvne zvolte restauraci a objednavku";
-    private readonly string searchToggleOff = "Kliknete zde pro zahajeni hledani";
-    private readonly string searchToggleOn = "Prave hledam dostupne kuryry!";
+    private readonly string searchToggleDefault = "Prvne si zvolte co chcete objednat";
+    private readonly string searchToggleOff = "Vyhledat kuryra";
+    private readonly string searchToggleOn = "Cekam na potvrzeni od kuryra v okoli...";
     
     public SourceList<Restaurant> Source { get; set; } = new SourceList<Restaurant>();
     public readonly ReadOnlyObservableCollection<Restaurant> _restaurants;

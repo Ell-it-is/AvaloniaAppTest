@@ -29,8 +29,12 @@ public partial class RestaurantDetailView : UserControl {
         App._MainViewModel.OnBackRequested(sender, e);
     }
 
-    private void Panel_OnInitialized(object? sender, EventArgs e) {
+    private void StyledElement_OnInitialized(object? sender, EventArgs e) {
         _restaurantDetailViewModel = (RestaurantDetailViewModel) DataContext;
+        
+        RestaurantNamesComboBox.PlaceholderText = DefaultRestaurant.Name;
+        FoodNamesComboBox.PlaceholderText = DefaultRestaurant.SelectedFood;
+        DrinkNamesComboBox.PlaceholderText = DefaultRestaurant.SelectedDrink;
         
         RestaurantNamesComboBox.ItemsSource = RestaurantsService.RestaurantNames;
         FoodNamesComboBox.ItemsSource = RestaurantsService.FoodNames;
@@ -39,9 +43,5 @@ public partial class RestaurantDetailView : UserControl {
         RestaurantNamesComboBox.SelectedItem = _restaurantDetailViewModel.Restaurant.Name;
         FoodNamesComboBox.SelectedItem = _restaurantDetailViewModel.Restaurant.SelectedFood;
         DrinkNamesComboBox.SelectedItem = _restaurantDetailViewModel.Restaurant.SelectedDrink;
-        
-        RestaurantNamesComboBox.PlaceholderText = DefaultRestaurant.Name;
-        FoodNamesComboBox.PlaceholderText = DefaultRestaurant.SelectedFood;
-        DrinkNamesComboBox.PlaceholderText = DefaultRestaurant.SelectedDrink;
     }
 }

@@ -10,8 +10,12 @@
              x:CompileBindings="True"
              x:Class="AvaloniaApplication1.Views.Customer.PrefListView"
              x:DataType="vm:PrefListViewModel">
-        
-    <StackPanel>
+    
+    <Design.DataContext>    
+        <vm:PrefListViewModel/>
+    </Design.DataContext>
+    <!--TODO: Make delete button as square shape of listboxitem height (more easily clickable)-->
+    <Grid RowDefinitions="* Auto">
         <!--
         Restaurant states:
             - Not selected
@@ -19,14 +23,14 @@
                 1) Option to swap position with another restaurant if we select another restaurant at this point
                 2) Option to open details of this restaurant if we perfermed a double tap
         -->
-        <ListBox Name="_PrefList"
+        <ListBox Grid.Row="0" Name="_PrefList"
                  IsEnabled="{Binding PrefListIsEnabled}"
                  Tapped="_PrefList_OnTapped"
                  DoubleTapped="_PrefList_OnDoubleTapped"
                  ItemsSource="{Binding Restaurants}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="* * 0.3*"
+                    <Grid ColumnDefinitions="* * *"
                           RowDefinitions="* * *">
                         <TextBlock Grid.Row="0" Grid.Column="0" 
                                    Text="{Binding Name}" IsVisible="{Binding NameVisible}" />
@@ -34,25 +38,36 @@
                                    Text="{Binding SelectedFood}" IsVisible="{Binding FoodVisible}"></TextBlock>
                         <TextBlock Grid.Row="2" Grid.Column="0" Padding="10 0 0 0" 
                                    Text="{Binding SelectedDrink}" IsVisible="{Binding DrinkVisible}"></TextBlock>
-                        <TextBlock VerticalAlignment="Center" IsVisible="{Binding DefaultTextVisible}" Text="Zvolte objednavku"></TextBlock>
-                        <ButtonSpinner Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"
-                                       Initialized="TimeLimit_OnInitialized"
-                                       Spin="TimeLimit_OnSpin">
+                        <TextBlock VerticalAlignment="Center" IsVisible="{Binding DefaultTextVisible}" Text="Zvolit objednavku"></TextBlock>
+                        <ButtonSpinner Grid.Row="0" Grid.Column="1" 
+                                       Name="BtnSpinner"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Spin="TimeLimit_OnSpin"
+                                       Content="{Binding SpinnerContent}">
+                                       <!--ToolTip.Tip="Jak dlouho jsem ochotny cekat na kuryra"-->
                         </ButtonSpinner>
-                        <Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"
+                        <Button Grid.Row="0" Grid.Column="2" 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
                                 Command="{Binding $parent[UserControl].((vm:PrefListViewModel)DataContext).RemoveRestaurant}"
-                                CommandParameter="{Binding $parent[ListBoxItem]}">
+                                CommandParameter="{Binding $parent[ListBoxItem]}"
+                                IsVisible="{Binding CanDelete}">
                              Delete
                         </Button>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ToggleButton Name="SearchCouriersToggleBtn"
-                      Margin="0 20 0 0"
+        <ToggleButton Grid.Row="1" Name="SearchCouriersToggleBtn"
+                      FontSize="16"
+                      Padding="20"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center"
                       Command="{Binding CheckToggleBtn}"
                       Content="{Binding ToggleBtnContent}"
                       IsEnabled="{Binding ToggleBtnIsEnabled}">
         </ToggleButton>
-    </StackPanel>
+    </Grid>
 </UserControl>

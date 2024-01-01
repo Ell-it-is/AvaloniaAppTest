@@ -45,17 +45,14 @@ public partial class PrefListView : UserControl {
         }   
     }
     
-    private void TimeLimit_OnInitialized(object? sender, EventArgs e) {
-        var timeLimitBtn = sender as ButtonSpinner;
-        timeLimitBtn.Content = infinity;
-    }
-    
     private void TimeLimit_OnSpin(object? sender, SpinEventArgs e) {
-        var timeLimitBtn = sender as ButtonSpinner;
+        var timeLimitBtn = sender as ButtonSpinner; 
         string content = timeLimitBtn.Content as string;
+        var restaurant = (Restaurant)timeLimitBtn.DataContext;
         if (content == infinity) {
             if (e.Direction == SpinDirection.Increase) {
                 timeLimitBtn.Content = "1 minuta";
+                restaurant.SpinnerContent = (string) timeLimitBtn.Content;
                 return;
             }
         } else {
@@ -66,9 +63,11 @@ public partial class PrefListView : UserControl {
             } else {
                 if (value == 1) {
                     timeLimitBtn.Content = infinity;
+                    restaurant.SpinnerContent = (string) timeLimitBtn.Content;
                     return;
                 } else if (value == 2) {
                     timeLimitBtn.Content = "1 minuta";
+                    restaurant.SpinnerContent = (string) timeLimitBtn.Content;
                     return;
                 } else {
                     value--;
@@ -80,6 +79,7 @@ public partial class PrefListView : UserControl {
             } else {
                 timeLimitBtn.Content = $"{value} minut";
             }
+            restaurant.SpinnerContent = (string) timeLimitBtn.Content;
         }
     }
 }
