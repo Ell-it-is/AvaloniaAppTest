@@ -32,7 +32,7 @@
                     <Grid ColumnDefinitions="Auto * * *"
                           RowDefinitions="* * *">
                         <TextBlock Grid.Row="0" Grid.Column="0"
-                                   Text="{Binding Position}"
+                                   Text="{Binding PositionInList}"
                                    IsVisible="{Binding IsValid}"
                                    Padding="0 0 10 0"></TextBlock>
                         <TextBlock Grid.Row="0" Grid.Column="0" 
@@ -50,7 +50,7 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        Spin="TimeLimit_OnSpin"
-                                       Content="{Binding SpinnerContent}"
+                                       Content="{Binding WaitTimeForCourier}"
                                        IsVisible="{Binding IsValid}">
                                        <!--ToolTip.Tip="Jak dlouho jsem ochotny cekat na kuryra"-->
                         </ButtonSpinner>

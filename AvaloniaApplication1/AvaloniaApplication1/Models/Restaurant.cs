@@ -22,9 +22,10 @@ public class Restaurant : ReactiveObject {
     [Reactive] public string Name { get; set; } = DefaultRestaurant.Name;
     [Reactive] public string SelectedFood { get; set; } = DefaultRestaurant.SelectedFood;
     [Reactive] public string SelectedDrink { get; set; } = DefaultRestaurant.SelectedDrink;
+    [Reactive] public string WaitTimeForCourier { get; set; } = "Infinity";
+    [Reactive] public string PositionInList { get; set; }
     [Reactive] public bool IsOpen { get; set; }
-    [Reactive] public string SpinnerContent { get; set; } = "Infinity";
-    [Reactive] public string Position { get; set; }
+    public int Rating { get; set; }
     
     // You must select Restaurant name and either food or drink
     public bool IsValid => Name != DefaultRestaurant.Name && (SelectedFood != DefaultRestaurant.SelectedFood || SelectedDrink != DefaultRestaurant.SelectedDrink);

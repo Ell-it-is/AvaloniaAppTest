@@ -52,7 +52,7 @@ public partial class PrefListView : UserControl {
         if (content == infinity) {
             if (e.Direction == SpinDirection.Increase) {
                 timeLimitBtn.Content = "1 minuta";
-                restaurant.SpinnerContent = (string) timeLimitBtn.Content;
+                restaurant.WaitTimeForCourier = (string) timeLimitBtn.Content;
                 return;
             }
         } else {
@@ -63,11 +63,11 @@ public partial class PrefListView : UserControl {
             } else {
                 if (value == 1) {
                     timeLimitBtn.Content = infinity;
-                    restaurant.SpinnerContent = (string) timeLimitBtn.Content;
+                    restaurant.WaitTimeForCourier = (string) timeLimitBtn.Content;
                     return;
                 } else if (value == 2) {
                     timeLimitBtn.Content = "1 minuta";
-                    restaurant.SpinnerContent = (string) timeLimitBtn.Content;
+                    restaurant.WaitTimeForCourier = (string) timeLimitBtn.Content;
                     return;
                 } else {
                     value--;
@@ -79,7 +79,7 @@ public partial class PrefListView : UserControl {
             } else {
                 timeLimitBtn.Content = $"{value} minut";
             }
-            restaurant.SpinnerContent = (string) timeLimitBtn.Content;
+            restaurant.WaitTimeForCourier = (string) timeLimitBtn.Content;
         }
     }
 }

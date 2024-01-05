@@ -86,7 +86,7 @@ public class PrefListViewModel : ViewModelBase {
 
     public void CalculatePositions() {
         foreach (var r in Source.Items.Where(r => r.IsValid)) {
-            r.Position = $"{Source.Items.IndexOf(r) + 1}.";
+            r.PositionInList = $"{Source.Items.IndexOf(r) + 1}.";
         }
     }
     
